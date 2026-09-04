@@ -108,6 +108,7 @@
     border-radius:9px;
     border:1px solid var(--line);
     background:var(--paper);
+    color:var(--ink);
     font-size:15px;
     font-family:'Inter',sans-serif;
   }
@@ -178,6 +179,7 @@
     border-radius:8px;
     border:1px solid var(--line);
     background:var(--paper);
+    color:var(--ink);
   }
 
   /* ---- Check-in tab ---- */
@@ -204,6 +206,7 @@
     border-radius:10px;
     border:1px solid var(--line);
     background:var(--card);
+    color:var(--ink);
     font-size:16px;
     font-family:'Inter',sans-serif;
     margin-bottom:14px;
@@ -277,7 +280,7 @@
   .gate input{
     width:100%; text-align:center; letter-spacing:4px; font-size:20px;
     padding:14px; border-radius:10px; border:1px solid var(--line);
-    background:var(--card); font-family:'Inter',sans-serif; margin-bottom:12px;
+    background:var(--card); color:var(--ink); font-family:'Inter',sans-serif; margin-bottom:12px;
   }
   .gate input:focus{outline:2px solid var(--sage); outline-offset:1px;}
   .gate button{
@@ -326,7 +329,6 @@
   <div class="tabpanel active" id="tab-register">
     <div class="formcard">
       <h2>Add children to the roster</h2>
-      <p style="font-size:12px;color:var(--muted);margin:0 0 10px;">Names only — ages, parent contact, and medical notes stay in Odoo. Paste one name per line, or copy a whole column straight from an Odoo export.</p>
       <div class="field">
         <textarea id="bulkNames" placeholder="Naledi Khumalo&#10;Thabo Mokoena&#10;Grace Dlamini" style="min-height:90px;"></textarea>
       </div>
@@ -488,7 +490,7 @@ async function addChildren(){
   }
 }
 
-async function removeChild(id, ev){
+async function removeFromRoster(id, ev){
   if(ev) ev.stopPropagation();
   const r = roster.find(r => r.id === id);
   if(!r) return;
@@ -510,7 +512,7 @@ function renderRoster(){
     card.className = 'rcard';
     card.innerHTML = `
       <div class="name">${escapeHtml(r.name)}</div>
-      <button class="btn btn-danger" style="padding:6px 12px;font-size:12px;" onclick="removeChild('${r.id}', event)">Remove</button>
+      <button class="btn btn-danger" style="padding:6px 12px;font-size:12px;" onclick="removeFromRoster('${r.id}', event)">Remove</button>
     `;
     listEl.appendChild(card);
   });
